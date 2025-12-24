@@ -12,7 +12,7 @@
         v-for="item in languages.data"
         :key="item.id"
         :data="{
-          id: item.id,
+          id: String(item.id),
           title: `Idioma: ${item.language}`,
           resumen: `Nivel: ${item.level}`,
           hidden: item.hidden,
@@ -41,6 +41,8 @@ import Card from "../../../shared/components/Card.vue";
 import type { CardActionType } from "../../../shared/types/CardType";
 import CardLoader from "../../../shared/components/CardLoader.vue";
 import { useRoute, useRouter } from "vue-router";
+import type { ApiResponseType } from "../../../shared/types/ApiResponseType";
+import type { LanguageType } from "../type/LanguageType";
 
 const route = useRoute();
 const router = useRouter();
@@ -60,7 +62,7 @@ const {
   isLoading,
   isError,
   error,
-} = useQuery({
+} = useQuery<ApiResponseType<LanguageType[]>>({
   queryKey: ["my-languages", page, limit, hiddenValue],
   queryFn: () =>
     LanguageService.getMyLanguages({
