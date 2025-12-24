@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full bg-white shadow flex justify-between px-2 py-3 sticky top-0">
+  <header class="w-full bg-white shadow flex justify-between px-2 py-3 sticky top-0 z-50">
     <div class="flex items-center gap-3">
       <FwbButton aria-label="Abrir menú" color="alternative" square @click="sidebarRef?.open()">
         ☰

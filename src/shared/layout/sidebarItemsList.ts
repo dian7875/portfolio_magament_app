@@ -3,9 +3,9 @@ import type { SidebarItem } from "./sidebarType";
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   { label: "Mi perfil", icon: "pi pi-user", path: "/usuario" },
 
-  { label: "Lenguajes", icon: "pi pi-language", path: "/languages" },
+  { label: "Idiomas", icon: "pi pi-language", path: "/idiomas" },
   { label: "Habilidades", icon: "pi pi-star", path: "/skills" },
-  { label: "Educación", icon: "pi pi-book", path: "/education" },
+  { label: "Educación", icon: "pi pi-book", path: "/educacion" },
   {
     label: "Experiencia laboral",
     icon: "pi pi-briefcase",

@@ -1,11 +1,12 @@
 <template>
-  <div class="p-4 bg-white flex justify-between rounded-2xl">
+  <div class="p-4 bg-white flex justify-between rounded-2xl max-md:flex-col">
     <div>
       <h3>{{ props.data.title }}</h3>
       <p>{{ props.data.resumen }}</p>
     </div>
     <div class="flex flex-col gap-2">
       <FwbBadge
+      class="w-full"
         :type="
           data.hidden
             ? VISIBILITY_META.hidden.badgeType
@@ -19,7 +20,8 @@
         }}
       </FwbBadge>
       <div class="flex gap-2">
-        <FwbButton
+        <FwbButton 
+        class=" max-md:w-full"
           v-for="action in visibleActions"
           :key="action"
           :color="CARD_ACTION_META[action].color"
