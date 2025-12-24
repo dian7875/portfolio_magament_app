@@ -4,7 +4,7 @@
       v-ripple
       @click="go"
       :class="[
-        'w-full flex items-center gap-3 px-3 py-2 rounded text-left transition-colors hover:bg-zinc-700 cursor-pointer',
+        'w-full flex items-center gap-3 px-3 py-2 rounded text-left transition-colors hover:bg-zinc-700',
         isActive
           ? 'bg-primary text-primary-contrast'
           : 'text-surface-700 hover:bg-surface-100',

@@ -1,7 +1,7 @@
 <template>
-  <header class="w-full bg-white shadow flex justify-between px-2 py-3">
+  <header class="w-full bg-white shadow flex justify-between px-2 py-3 sticky top-0">
     <div class="flex items-center gap-3">
-      <FwbButton class=" cursor-pointer" aria-label="Abrir menú" color="alternative" square @click="sidebarRef?.open()">
+      <FwbButton aria-label="Abrir menú" color="alternative" square @click="sidebarRef?.open()">
         ☰
       </FwbButton>
 
@@ -19,14 +19,13 @@
             :img="photoUrl"
             alt="Perfil"
             rounded
-            class="cursor-pointer"
           />
         </template>
         <nav aria-label="Menú de usuario" class="flex flex-col gap-2 p-2">
           <RouterLink class="hover:border-b hover:text-blue-500" to="/"
             >Inicio</RouterLink
           >
-          <RouterLink class="hover:border-b hover:text-blue-500" to="/"
+          <RouterLink class="hover:border-b hover:text-blue-500" to="/usuario"
             >Mi Perfil</RouterLink
           >
           <RouterLink class="hover:border-b hover:text-red-500" to="/"

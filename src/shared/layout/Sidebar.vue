@@ -33,7 +33,7 @@
             <span class="font-semibold">{{ userName }}</span>
           </div>
 
-          <FwbButton class="w-full cursor-pointer" color="red" pill outline
+          <FwbButton class="w-full" color="red" pill outline
             >Cerrar sesión</FwbButton
           >
         </div>
@@ -47,7 +47,7 @@ import { computed, ref } from "vue";
 
 import SidebarItem from "./SidebarItem.vue";
 import { SIDEBAR_ITEMS } from "./sidebarItemsList";
-import { Drawer } from "primevue";
+import { Button, Drawer } from "primevue";
 import { FwbAvatar, FwbButton } from "flowbite-vue";
 import { userStore } from "../store/user";
 
