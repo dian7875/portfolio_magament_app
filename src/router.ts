@@ -3,6 +3,10 @@ import Test from "./shared/components/Test.vue";
 import MyProfile from "./feautures/profile/page/MyProfile.vue";
 import LanguageManagment from "./feautures/languages/page/LanguageManagment.vue";
 import EducationManagment from "./feautures/education/page/EducationManagment.vue";
+import SocialNetRefsManagment from "./feautures/socialNetworks/page/SocialNetRefsManagment.vue";
+import WorkExperienceManagment from "./feautures/workExperience/page/WorkExperienceManagment.vue";
+import SkillsManagment from "./feautures/skills/page/SkillsManagment.vue";
+import ProjectsManagment from './feautures/projects/page/ProjectsManagment.vue';
 
 const routes = [
   {
@@ -24,6 +28,26 @@ const routes = [
     path: "/educacion",
     name: "Education",
     component: EducationManagment,
+  },
+  {
+    path: "/redes-sociales",
+    name: "SocialNetworks",
+    component: SocialNetRefsManagment,
+  },
+  {
+    path: "/experiencia",
+    name: "WorkExperience",
+    component: WorkExperienceManagment,
+  },
+  {
+    path: "/habilidades",
+    name: "Skills",
+    component: SkillsManagment,
+  },
+  {
+    path: "/proyectos",
+    name: "projects",
+    component: ProjectsManagment,
   },
 ];
 

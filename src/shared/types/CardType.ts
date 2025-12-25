@@ -37,7 +37,7 @@ export const CARD_ACTION_META: Record<CardActionType, CardActionMeta> = {
 export type CardData = {
   id: string;
   title: string;
-  resumen: string;
+  resumen: string | string[];
   hidden: boolean;
   actions: CardActionType[];
 };

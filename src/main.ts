@@ -6,6 +6,7 @@ import router from "./router";
 
 import Aura from "@primeuix/themes/aura";
 import { VueQueryPlugin } from "@tanstack/vue-query";
+import { Ripple } from "primevue";
 const app = createApp(App)
   .use(router)
   .use(VueQueryPlugin)
@@ -13,6 +14,7 @@ const app = createApp(App)
     theme: {
       preset: Aura,
     },
-  });
+  })
+  .directive("ripple", Ripple);
 
 app.mount("#app");

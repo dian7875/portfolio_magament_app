@@ -10,3 +10,11 @@ export function formatPeriod(
     ? `${startYear} – ${endYear}`
     : `${startYear} – En curso`
 }
+
+export function formatYear(
+  date: string
+): string {
+  const year = date? new Date(date).getFullYear() : 'N/A'
+
+  return year.toString()
+}

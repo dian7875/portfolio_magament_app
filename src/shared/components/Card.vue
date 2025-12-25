@@ -2,11 +2,19 @@
   <div class="p-4 bg-white flex justify-between rounded-2xl max-md:flex-col">
     <div>
       <h3>{{ props.data.title }}</h3>
-      <p>{{ props.data.resumen }}</p>
+      <p v-if="typeof data.resumen === 'string'">
+        {{ props.data.resumen }}
+      </p>
+
+      <ul v-else>
+        <li v-for="(line, i) in props.data.resumen" :key="i">
+          {{ line }}
+        </li>
+      </ul>
     </div>
     <div class="flex flex-col gap-2">
       <FwbBadge
-      class="w-full"
+        class="w-full"
         :type="
           data.hidden
             ? VISIBILITY_META.hidden.badgeType
@@ -20,8 +28,8 @@
         }}
       </FwbBadge>
       <div class="flex gap-2">
-        <FwbButton 
-        class=" max-md:w-full"
+        <FwbButton
+          class="max-md:w-full"
           v-for="action in visibleActions"
           :key="action"
           :color="CARD_ACTION_META[action].color"
