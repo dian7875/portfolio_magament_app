@@ -24,4 +24,7 @@ button{
   cursor: pointer;
 }
 
+.custom-text-area span, label{
+ color: white !important;
+}
 

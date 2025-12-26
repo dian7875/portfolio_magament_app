@@ -19,16 +19,31 @@
         {{ location || "No establecido" }}
       </p>
     </div>
-    <FwbButton @click="openEditInfo" class="max-md:w-full" color="yellow">
+    <FwbButton @click="isEditOpen = true" class="max-md:w-full" color="yellow">
       Editar
     </FwbButton>
   </div>
+  <BasicModal
+    form-id="edit-basic-info-form"
+    v-model:visible="isEditOpen"
+    title="Editar información"
+    :loading="loading"
+  >
+    <EditBasicInfoForm
+      @update:visible="isEditOpen = $event"
+      ref="formRef"
+      :user-id="id"
+    />
+  </BasicModal>
 </template>
 
 <script setup lang="ts">
 import { FwbButton } from "flowbite-vue";
+import BasicModal from "../../../../shared/components/BasicModal.vue";
+import EditBasicInfoForm from "../forms/EditBasicInfoForm.vue";
+import { computed, ref } from "vue";
 
-defineProps<{
+const props = defineProps<{
   id: string;
   userName: string;
   phone: string;
@@ -40,5 +55,8 @@ defineProps<{
   hostUrl?: string | null;
 }>();
 
-const openEditInfo = () => {};
+const isEditOpen = ref(false);
+const formRef = ref<InstanceType<typeof EditBasicInfoForm>>();
+
+const loading = computed(() => formRef.value?.isPending ?? false);
 </script>
