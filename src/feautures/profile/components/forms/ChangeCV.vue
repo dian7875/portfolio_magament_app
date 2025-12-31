@@ -57,6 +57,7 @@
 import { ref } from "vue";
 import { useQueryClient } from "@tanstack/vue-query";
 import { UseEditUserCV } from "../../composables/EditUserCV";
+import toast from "vue3-hot-toast";
 
 const props = defineProps<{
   currentCVUrl?: string | null;
@@ -86,8 +87,12 @@ const emit = defineEmits<{
 }>();
 
 async function submitForm() {
-  if (!selectedFile.value) return;
-
+  if (!selectedFile.value){
+    toast.error("No se ha adjuntado un documento.")
+    emit("update:visible", false);
+    return;
+  } 
+   
   mutate(selectedFile.value, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });

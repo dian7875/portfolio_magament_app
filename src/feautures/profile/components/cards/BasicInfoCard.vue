@@ -11,9 +11,22 @@
       </p>
       <p><strong>Titulo:</strong> {{ title || "No establecido" }}</p>
       <p><strong>Subtítulo:</strong> {{ subtitle || "No establecido" }}</p>
-      <p><strong>Teléfono:</strong> {{ phone }}</p>
+      <p class="tracking-wide"><strong>Teléfono:</strong> {{ phone }}</p>
       <p><strong>Email:</strong> {{ email }}</p>
-      <p><strong>Web:</strong> {{ hostUrl || "No establecido" }}</p>
+      <p>
+        <strong>Web: </strong>
+        <span v-if="hostUrl">
+          <a
+            :href="hostUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 hover:underline"
+          >
+            {{ hostUrl }}
+          </a>
+        </span>
+        <span v-else>No establecido</span>
+      </p>
       <p>
         <strong class="truncate">Direccion:</strong>
         {{ location || "No establecido" }}

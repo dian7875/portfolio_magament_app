@@ -30,10 +30,41 @@
     @update:page="page = $event"
     @update:limit="limit = $event"
   />
+
+  <BasicModal
+    form-id="edit-lang-info-form"
+    :visible="activeModal === 'edit'"
+    @update:visible="(val) => !val && closeModal()"
+    :loading="loading"
+    title="Editar idioma"
+  >
+    <EditLanguageForm
+      v-if="selectedId"
+      :id="selectedId"
+      @success="closeModal"
+      ref="formRef"
+    />
+  </BasicModal>
+
+  <BasicModal
+    :form-id="`${activeModal}-lang-form`"
+    :visible="activeModal !== null && activeModal !== 'edit'"
+    @update:visible="(val) => !val && closeModal()"
+    :loading="loading"
+    title="Confirmar acción"
+  >
+    <ConfirmAcctionForm
+      v-if="selectedId && activeModal !== null && activeModal !== 'edit'"
+      :id="selectedId"
+      :action="activeModal"
+      @success="closeModal"
+      ref="formRef"
+    />
+  </BasicModal>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import { LanguageService } from "../service/LanguagesService";
 import Pagination from "../../../shared/components/Pagination.vue";
@@ -43,6 +74,9 @@ import CardLoader from "../../../shared/components/CardLoader.vue";
 import { useRoute, useRouter } from "vue-router";
 import type { ApiResponseType } from "../../../shared/types/ApiResponseType";
 import type { LanguageType } from "../type/LanguageType";
+import BasicModal from "../../../shared/components/BasicModal.vue";
+import EditLanguageForm from "../components/forms/EditLanguageForm.vue";
+import ConfirmAcctionForm from "../components/forms/ConfirmAcctionForm.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -73,8 +107,19 @@ const {
   retry: false,
 });
 
+const activeModal = ref<CardActionType | null>(null);
+const selectedId = ref<number | null>(null);
+const formRef = ref<InstanceType<typeof EditLanguageForm>>();
+const loading = computed(() => formRef.value?.isPending ?? false);
+
 function onCardAction(payload: { type: CardActionType; id: string }) {
-  console.log(payload.type, payload.id);
+  selectedId.value = Number(payload.id);
+  activeModal.value = payload.type;
+}
+
+function closeModal() {
+  activeModal.value = null;
+  selectedId.value = null;
 }
 
 onMounted(() => {

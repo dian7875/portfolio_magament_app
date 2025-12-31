@@ -94,6 +94,7 @@ import { getChangedFields } from "../../../../shared/utils/GetChangedFields";
 import { veeBind } from "../../../../shared/utils/VeeBindHelper";
 import { normalizeObject } from "../../../../shared/utils/NormalizeObjet";
 import { UseEditUser } from "../../composables/EditUserBasicInfo";
+import toast from "vue3-hot-toast";
 
 const {
   data: me,
@@ -146,7 +147,8 @@ const submitForm = handleSubmit(async (values) => {
   const payload = getChangedFields(initialData.value, values);
 
   if (Object.keys(payload).length === 0) {
-    console.log("No hay cambios");
+    toast("No se han realizado cambios.");
+    emit("update:visible", false);
     return;
   }
 

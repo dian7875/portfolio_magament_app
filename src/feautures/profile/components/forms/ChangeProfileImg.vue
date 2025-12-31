@@ -59,6 +59,7 @@
 import { ref } from "vue";
 import { UseEditUserPhoto } from "../../composables/EditUserPhoto";
 import { useQueryClient } from "@tanstack/vue-query";
+import toast from "vue3-hot-toast";
 
 const props = defineProps<{
   currentPhotoUrl?: string | null;
@@ -89,7 +90,12 @@ const emit = defineEmits<{
 }>();
 
 async function submitForm() {
-  if (!selectedFile.value) return;
+  if (!selectedFile.value){
+    toast.error("No se ha adjuntado una foto de perfil.")
+    emit("update:visible", false);
+    return;
+  } 
+    
 
   mutate(selectedFile.value, {
     onSuccess: () => {
