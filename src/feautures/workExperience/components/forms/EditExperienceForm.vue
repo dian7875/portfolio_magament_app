@@ -131,7 +131,7 @@ const {
   isError,
   error,
 } = useQuery<ExperiencesType>({
-  queryKey: ["education", props.id],
+  queryKey: ["experience", props.id],
   queryFn: () => WorkExperiencesService.getOneExperience(props.id),
   retry: false,
 });

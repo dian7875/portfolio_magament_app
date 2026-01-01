@@ -42,7 +42,7 @@
     :visible="activeModal === 'edit'"
     @update:visible="(val) => !val && closeModal()"
     :loading="loading"
-    title="Editar idioma"
+    title="Editar educacion"
   >
     <EditEducationForm
       v-if="selectedId"

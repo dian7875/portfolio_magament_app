@@ -42,7 +42,7 @@
     :visible="activeModal === 'edit'"
     @update:visible="(val) => !val && closeModal()"
     :loading="loading"
-    title="Editar habilidad"
+    title="Editar experiencia"
   >
     <EditExperienceForm
       v-if="selectedId"

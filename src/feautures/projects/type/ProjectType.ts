@@ -12,3 +12,12 @@ export type Project = {
   hidden: boolean;
   finishDate: string;
 };
+
+
+export type UpdateProjectType = {
+  id: number;
+  data: Partial<Project>;
+  files?: File[];
+}
+
+
