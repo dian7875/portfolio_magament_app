@@ -76,7 +76,7 @@ import type { ApiResponseType } from "../../../shared/types/ApiResponseType";
 import type { LanguageType } from "../type/LanguageType";
 import BasicModal from "../../../shared/components/BasicModal.vue";
 import EditLanguageForm from "../components/forms/EditLanguageForm.vue";
-import ConfirmAcctionForm from "../components/forms/ConfirmAcctionForm.vue";
+import type ConfirmAcctionForm from "../components/forms/ConfirmAcctionForm.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -109,7 +109,12 @@ const {
 
 const activeModal = ref<CardActionType | null>(null);
 const selectedId = ref<number | null>(null);
-const formRef = ref<InstanceType<typeof EditLanguageForm>>();
+
+type FormInstance =
+  | InstanceType<typeof EditLanguageForm>
+  | InstanceType<typeof ConfirmAcctionForm>;
+
+const formRef = ref<FormInstance | null>(null);
 const loading = computed(() => formRef.value?.isPending ?? false);
 
 function onCardAction(payload: { type: CardActionType; id: string }) {

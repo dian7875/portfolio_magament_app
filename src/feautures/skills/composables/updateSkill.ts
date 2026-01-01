@@ -3,14 +3,14 @@ import toast from "vue3-hot-toast";
 import { h } from "vue";
 import type { ApiError } from "../../../shared/types/ApiError";
 import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
-import { LanguageService } from "../service/LanguagesService";
 import type { UpdateType } from "../../../shared/types/UpdateType";
-import type { LanguageType } from "../type/LanguageType";
+import type { SkillsType } from "../type/SkillsType";
+import { SkillsService } from "../service/SkillsService";
 
-export const UseEditLanguage = () => {
+export const UseUpdateSkill = () => {
   const mutation = useMutation({
-    mutationFn: (data: UpdateType<LanguageType>) =>
-      toast.promise(LanguageService.patchLanguage(data), {
+    mutationFn: (data: UpdateType<SkillsType>) =>
+      toast.promise(SkillsService.patchSkill(data), {
         loading: "Please wait...",
         success: (response: ApiMutationResponse) =>
           h("span", `${response.message}`),

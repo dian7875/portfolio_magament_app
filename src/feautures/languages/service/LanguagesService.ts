@@ -1,7 +1,8 @@
 import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { PaginationDto } from "../../../shared/types/PaginationType";
-import type { UpdateLanguageType } from "../type/EditLanguageType";
+import type { UpdateType } from "../../../shared/types/UpdateType";
+import type { LanguageType } from "../type/LanguageType";
 
 export const LanguageService = {
   async getMyLanguages(filters: PaginationDto) {
@@ -24,7 +25,7 @@ export const LanguageService = {
     }
   },
 
-  async patchLanguage(data: UpdateLanguageType) {
+  async patchLanguage(data: UpdateType<LanguageType>) {
     try {
       const response = await axiosInstance.patch(
         `/languages/${data.id}`,
