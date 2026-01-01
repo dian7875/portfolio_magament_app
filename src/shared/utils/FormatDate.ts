@@ -1,6 +1,6 @@
 export function formatPeriod(
   start: string,
-  end: string | null,
+  end: string | null | Date,
   finished: boolean
 ): string {
   const startYear = new Date(start).getFullYear()
@@ -18,3 +18,9 @@ export function formatYear(
 
   return year.toString()
 }
+
+
+export const toDateInput = (value?: string | Date | null) => {
+  if (!value) return "";
+  return new Date(value).toISOString().slice(0, 10);
+};

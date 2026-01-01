@@ -5,6 +5,6 @@ export type EducationType = {
   description?: string | null;
   startDate: string;
   finished: boolean;
-  endDate?: string | null;
+  endDate?: string | null ;
   hidden: boolean;
 };

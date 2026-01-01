@@ -52,7 +52,7 @@ const props = defineProps<{
 }>();
 
 const {
-  data: me,
+  data: item,
   isLoading,
   isError,
   error,
@@ -78,7 +78,7 @@ const { handleSubmit, values, setValues, setFieldValue } = useForm<
 const initialData = ref<SocialNetworkRefType | null>(null);
 
 watch(
-  me,
+  item,
   (data) => {
     if (!data) return;
 
@@ -111,9 +111,6 @@ const submitForm = handleSubmit(async (values) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["my-networkRefs"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["SN", props.id],
       });
       emit("success");
     },

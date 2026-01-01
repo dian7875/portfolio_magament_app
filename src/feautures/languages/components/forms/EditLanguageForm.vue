@@ -50,7 +50,7 @@ const props = defineProps<{
 }>();
 
 const {
-  data: me,
+  data: item,
   isLoading,
   isError,
   error,
@@ -76,7 +76,7 @@ const { handleSubmit, values, setValues, setFieldValue } = useForm<
 const initialData = ref<LanguageType | null>(null);
 
 watch(
-  me,
+  item,
   (data) => {
     if (!data) return;
 
@@ -109,9 +109,6 @@ const submitForm = handleSubmit(async (values) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["my-languages"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["language", props.id],
       });
       emit("success");
     },
