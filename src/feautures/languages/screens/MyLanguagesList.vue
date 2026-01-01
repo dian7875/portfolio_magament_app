@@ -76,7 +76,7 @@ import type { ApiResponseType } from "../../../shared/types/ApiResponseType";
 import type { LanguageType } from "../type/LanguageType";
 import BasicModal from "../../../shared/components/BasicModal.vue";
 import EditLanguageForm from "../components/forms/EditLanguageForm.vue";
-import type ConfirmAcctionForm from "../components/forms/ConfirmAcctionForm.vue";
+import ConfirmAcctionForm from "../components/forms/ConfirmAcctionForm.vue";
 
 const route = useRoute();
 const router = useRouter();

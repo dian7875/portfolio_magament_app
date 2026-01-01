@@ -12,14 +12,12 @@
 
     <template v-else>
       <FwbInput
-        id="role"
         name="role"
         label="Cargo"
         placeholder="Ej: Desarrollador Frontend"
         v-bind="bind('role')"
       />
       <FwbInput
-        id="company"
         name="company"
         label="Empresa"
         placeholder="Ej: MiEmpresa S.A."
@@ -27,7 +25,6 @@
       />
 
       <FwbTextarea
-        id="description"
         name="description"
         label="Descripción"
         placeholder="Descripción breve del estudio"
@@ -51,11 +48,15 @@
       />
 
       <div class="flex flex-col gap-2">
-        <label class="block text-sm font-medium text-gray-900"
-          >Responsabilidades</label
+        <label
+          for="newResponsability"
+          class="block text-sm font-medium text-gray-900"
         >
+          Responsabilidades
+        </label>
         <div class="flex gap-2">
           <input
+            id="newResponsability"
             type="text"
             v-model="newResponsability"
             placeholder="Agregar responsabilidad"

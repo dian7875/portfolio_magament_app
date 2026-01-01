@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col gap-1">
-    <label v-if="label" :for="id" class="block text-sm font-medium text-gray-900">
+    <label v-if="label" class="block text-sm font-medium text-gray-900">
       {{ label }}
     </label>
 
     <DatePicker
       :id="id"
-      :name="name"
+      :name="props.name"
       :disabled="disabled"
       v-model="internalValue"
       class="w-full"
