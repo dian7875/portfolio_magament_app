@@ -5,6 +5,6 @@ export type ExperiencesType = {
   startDate: string
   endDate: string
   description: string
-  responsabilities: string[]
+  responsibilities: string[]
   hidden: boolean;
 };

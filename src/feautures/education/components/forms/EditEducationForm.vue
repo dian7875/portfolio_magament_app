@@ -41,7 +41,7 @@
         id="startDate"
         name="startDate"
         label="Fecha de inicio"
-        v-model="values.startDate"
+        :model-value="values.startDate"
         @update:model-value="(val) => setFieldValue('startDate', val as string)"
       />
       <FwbCheckbox
@@ -57,7 +57,7 @@
         name="endDate"
         label="Fecha de fin"
         :disabled="!values.finished"
-        v-model="values.endDate"
+        :model-value="values.endDate"
         @update:model-value="(val) => setFieldValue('endDate', val as string)"
       />
     </template>
