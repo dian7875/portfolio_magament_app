@@ -2,7 +2,8 @@ import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { SkillsFilters } from "../type/SkillsFilters";
 import type { UpdateType } from "../../../shared/types/UpdateType";
-import type { SkillsType } from "../type/SkillsType";
+import type { CreateSkillsDto, SkillsType } from "../type/SkillsType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
 
 export const SkillsService = {
   async getMySkills(filters: SkillsFilters) {
@@ -25,82 +26,29 @@ export const SkillsService = {
       throw new Error("Error desconocido");
     }
   },
-
-  async removeSkill(id: number) {
-    try {
-      const response = await axiosInstance.delete(`/Skills/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  removeSkill(id: number) {
+    return axiosRequest(() => axiosInstance.delete(`/skills/${id}`));
   },
 
-  async hideSkill(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/Skills/hide/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  hideSkill(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/skills/hide/${id}`));
   },
 
-  async restoreSkill(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/Skills/recover/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  restoreSkill(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/skills/recover/${id}`));
   },
 
-  async getOneSkill(id: number) {
-    try {
-      const response = await axiosInstance.get(`/Skills/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  getOneSkill(id: number) {
+    return axiosRequest<SkillsType>(() => axiosInstance.get(`/skills/${id}`));
   },
 
-  async patchSkill(data: UpdateType<SkillsType>) {
-    try {
-      const response = await axiosInstance.patch(
-        `/skills/${data.id}`,
-        data.data
-      );
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  patchSkill(data: UpdateType<SkillsType>) {
+    return axiosRequest(() =>
+      axiosInstance.patch(`/skills/${data.id}`, data.data)
+    );
+  },
+
+  postSkill(data: CreateSkillsDto) {
+    return axiosRequest(() => axiosInstance.post(`/skills`, data));
   },
 };

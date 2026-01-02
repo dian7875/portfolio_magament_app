@@ -21,3 +21,9 @@ export type UpdateProjectType = {
 }
 
 
+export type CreateProjectDto = {
+  data: Partial<Project>;
+  files?: File[];
+}
+
+

@@ -4,3 +4,7 @@ export type LanguageType = {
   hidden: boolean;
   level: string;
 };
+export type CreateLanguageDto = {
+  language: string;
+  level: string;
+};

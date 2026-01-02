@@ -1,6 +1,9 @@
 import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { UpdateType } from "../../../shared/types/UpdateType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { CreateProjectDto, Project } from "../type/ProjectType";
+import { handleAxiosError } from "../../../shared/utils/handleAxiosError";
 
 export const ProjectsService = {
   async getMyProjects(filters: any) {
@@ -22,6 +25,18 @@ export const ProjectsService = {
     }
   },
 
+  async postProject(data: CreateProjectDto) {
+    try {
+      const response = await axiosInstance.post(`/projects`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error: unknown) {
+      handleAxiosError(error);
+    }
+  },
   async patchProject(data: UpdateType<FormData>) {
     try {
       const response = await axiosInstance.patch(
@@ -35,73 +50,23 @@ export const ProjectsService = {
       );
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
+      handleAxiosError(error);
     }
   },
 
-  async removeProject(id: number) {
-    try {
-      const response = await axiosInstance.delete(`/projects/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  removeProject(id: number) {
+    return axiosRequest(() => axiosInstance.delete(`/projects/${id}`));
   },
 
-  async hideProject(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/projects/hide/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  hideProject(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/projects/hide/${id}`));
   },
 
-  async restoreProject(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/projects/recover/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  restoreProject(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/projects/recover/${id}`));
   },
 
-  async getOneProject(id: number) {
-    try {
-      const response = await axiosInstance.get(`/projects/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  getOneProject(id: number) {
+    return axiosRequest<Project>(() => axiosInstance.get(`/projects/${id}`));
   },
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { UserBasicInfoType } from "../type/userBasicInfoType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
 
 export const UserService = {
   async getMe() {
@@ -18,18 +19,7 @@ export const UserService = {
   },
 
   async patchMe(data: UserBasicInfoType) {
-    try {
-      const response = await axiosInstance.patch("/users/me/basic-info", data);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+    return axiosRequest(() => axiosInstance.post(`/users/me/basic-info`, data));
   },
 
   async updatePhoto(file: File) {
@@ -78,5 +68,5 @@ export const UserService = {
         throw new Error("Error desconocido");
       }
     }
-  }
+  },
 };

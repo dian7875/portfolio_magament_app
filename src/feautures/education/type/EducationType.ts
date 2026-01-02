@@ -8,3 +8,12 @@ export type EducationType = {
   endDate?: string | null ;
   hidden: boolean;
 };
+
+export type CreateEducationDto = {
+  institution: string;
+  title: string;
+  description?: string | null;
+  startDate: string;
+  finished: boolean;
+  endDate?: string | null ;
+};

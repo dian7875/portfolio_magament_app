@@ -2,7 +2,8 @@ import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { PaginationDto } from "../../../shared/types/PaginationType";
 import type { UpdateType } from "../../../shared/types/UpdateType";
-import type { LanguageType } from "../type/LanguageType";
+import type { CreateLanguageDto, LanguageType } from "../type/LanguageType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
 
 export const LanguageService = {
   async getMyLanguages(filters: PaginationDto) {
@@ -25,81 +26,31 @@ export const LanguageService = {
     }
   },
 
-  async patchLanguage(data: UpdateType<LanguageType>) {
-    try {
-      const response = await axiosInstance.patch(
-        `/languages/${data.id}`,
-        data.data
-      );
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  patchLanguage(data: UpdateType<LanguageType>) {
+    return axiosRequest(() =>
+      axiosInstance.patch(`/languages/${data.id}`, data.data)
+    );
   },
 
-  async removeLanguage(id: number) {
-    try {
-      const response = await axiosInstance.delete(`/languages/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  postLanguage(data: CreateLanguageDto) {
+    return axiosRequest(() => axiosInstance.post(`/languages`, data));
   },
 
-  async hideLanguage(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/languages/hide/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  removeLanguage(id: number) {
+    return axiosRequest(() => axiosInstance.delete(`/languages/${id}`));
   },
 
-  async restoreLanguage(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/languages/recover/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  hideLanguage(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/languages/hide/${id}`));
   },
 
-  async getOneLanguage(id: number) {
-    try {
-      const response = await axiosInstance.get(`/languages/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  restoreLanguage(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/languages/recover/${id}`));
+  },
+
+  getOneLanguage(id: number) {
+    return axiosRequest<LanguageType>(() =>
+      axiosInstance.get(`/languages/${id}`)
+    );
   },
 };

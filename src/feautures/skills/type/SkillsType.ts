@@ -5,3 +5,9 @@ export type SkillsType = {
   category: string;
   hidden: boolean;
 };
+
+export type CreateSkillsDto = {
+  name: string;
+  level: number;
+  category: string;
+};

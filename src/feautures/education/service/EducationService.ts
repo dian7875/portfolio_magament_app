@@ -2,7 +2,8 @@ import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { EducationFilters } from "../type/EducationFilter";
 import type { UpdateType } from "../../../shared/types/UpdateType";
-import type { EducationType } from "../type/EducationType";
+import type { CreateEducationDto, EducationType } from "../type/EducationType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
 
 export const EducationService = {
   async getMyEducations(filters: EducationFilters) {
@@ -24,86 +25,30 @@ export const EducationService = {
     }
   },
 
-  
-  async patchEducation(data: UpdateType<EducationType>) {
-    try {
-      const response = await axiosInstance.patch(
-        `/education/${data.id}`,
-        data.data
-      );
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  postEducation(data: CreateEducationDto) {
+    return axiosRequest(() => axiosInstance.post(`/education`, data));
   },
 
-  async removeEducation(id: number) {
-    try {
-      const response = await axiosInstance.delete(`/education/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  patchEducation(data: UpdateType<EducationType>) {
+    return axiosRequest(() =>
+      axiosInstance.patch(`/education/${data.id}`, data.data)
+    );
   },
 
-  async hideEducation(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/education/hide/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  removeEducation(id: number) {
+    return axiosRequest(() => axiosInstance.delete(`/education/${id}`));
   },
 
-  async restoreEducation(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/education/restore/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  hideEducation(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/education/hide/${id}`));
   },
 
-  async getOneEducation(id: number) {
-    try {
-      const response = await axiosInstance.get(`/education/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  restoreEducation(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/education/restore/${id}`));
   },
-
-
-
-
+  getOneEducation(id: number) {
+    return axiosRequest<EducationType>(() =>
+      axiosInstance.get(`/education/${id}`)
+    );
+  },
 };
