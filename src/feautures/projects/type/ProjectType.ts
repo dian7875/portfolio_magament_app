@@ -13,17 +13,19 @@ export type Project = {
   finishDate: string;
 };
 
+export type CreateProjectDto = {
+  title: string;
+  subtitle?: string | null;
+  description?: string | null;
+  repoUrl?: string | null;
+  demoUrl?: string | null;
+  techStack: string[];
+  finishDate?: string;
+  files?: File[];
+};
 
 export type UpdateProjectType = {
   id: number;
   data: Partial<Project>;
   files?: File[];
-}
-
-
-export type CreateProjectDto = {
-  data: Partial<Project>;
-  files?: File[];
-}
-
-
+};

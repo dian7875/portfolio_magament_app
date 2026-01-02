@@ -23,6 +23,22 @@
         :model-value="values.subtitle ?? ''"
         @update:model-value="(val) => setFieldValue('subtitle', val as string ?? '')"
       />
+      <FwbInput
+        id="repoUrl"
+        name="repoUrl"
+        label="Repositorio"
+        placeholder="https://github.com/ejemplo"
+        :model-value="values.repoUrl ?? ''"
+        @update:model-value="(val) => setFieldValue('repoUrl', val as string ?? '')"
+      />
+      <FwbInput
+        id="demoUrl"
+        name="demoUrl"
+        label="Demo"
+        placeholder="https://demo.com"
+        :model-value="values.demoUrl ?? ''"
+        @update:model-value="(val) => setFieldValue('demoUrl', val as string ?? '')"
+      />
 
       <FwbTextarea
         id="description"
