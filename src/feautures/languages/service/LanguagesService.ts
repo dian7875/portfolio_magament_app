@@ -4,6 +4,7 @@ import type { PaginationDto } from "../../../shared/types/PaginationType";
 import type { UpdateType } from "../../../shared/types/UpdateType";
 import type { CreateLanguageDto, LanguageType } from "../type/LanguageType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const LanguageService = {
   async getMyLanguages(filters: PaginationDto) {
@@ -27,25 +28,25 @@ export const LanguageService = {
   },
 
   patchLanguage(data: UpdateType<LanguageType>) {
-    return axiosRequest(() =>
+    return axiosRequest<ApiMutationResponse>(() =>
       axiosInstance.patch(`/languages/${data.id}`, data.data)
     );
   },
 
   postLanguage(data: CreateLanguageDto) {
-    return axiosRequest(() => axiosInstance.post(`/languages`, data));
+    return axiosRequest(() => axiosInstance.post<ApiMutationResponse>(`/languages`, data));
   },
 
   removeLanguage(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/languages/${id}`));
+    return axiosRequest(() => axiosInstance.delete<ApiMutationResponse>(`/languages/${id}`));
   },
 
   hideLanguage(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/languages/hide/${id}`));
+    return axiosRequest(() => axiosInstance.patch<ApiMutationResponse>(`/languages/hide/${id}`));
   },
 
   restoreLanguage(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/languages/recover/${id}`));
+    return axiosRequest(() => axiosInstance.patch<ApiMutationResponse>(`/languages/recover/${id}`));
   },
 
   getOneLanguage(id: number) {

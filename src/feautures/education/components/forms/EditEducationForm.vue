@@ -72,11 +72,11 @@ import { FwbCheckbox, FwbInput, FwbTextarea } from "flowbite-vue";
 import { getChangedFields } from "../../../../shared/utils/GetChangedFields";
 import { veeBind } from "../../../../shared/utils/VeeBindHelper";
 import { normalizeObject } from "../../../../shared/utils/NormalizeObjet";
-import { UseEditLanguage } from "../../composables/useEditLanguage";
 import toast from "vue3-hot-toast";
 import type { EducationType } from "../../type/EducationType";
 import { EducationService } from "../../service/EducationService";
 import FwbStyleDatePicker from "../../../../shared/components/FwbStyleDatePicker.vue";
+import { UseEditDegree } from "../../composables/useEditDregree";
 
 const props = defineProps<{
   id: number;
@@ -123,7 +123,7 @@ watch(
   { immediate: true }
 );
 
-const { mutate, isPending } = UseEditLanguage();
+const { mutate, isPending } = UseEditDegree();
 const queryClient = useQueryClient();
 
 const submitForm = handleSubmit(async (values) => {

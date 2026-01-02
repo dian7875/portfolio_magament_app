@@ -2,6 +2,7 @@ import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { UserBasicInfoType } from "../type/userBasicInfoType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const UserService = {
   async getMe() {
@@ -19,7 +20,7 @@ export const UserService = {
   },
 
   async patchMe(data: UserBasicInfoType) {
-    return axiosRequest(() => axiosInstance.post(`/users/me/basic-info`, data));
+    return axiosRequest(() => axiosInstance.post<ApiMutationResponse>(`/users/me/basic-info`, data));
   },
 
   async updatePhoto(file: File) {

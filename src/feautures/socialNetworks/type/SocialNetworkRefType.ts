@@ -4,3 +4,9 @@ export type SocialNetworkRefType = {
   redirectLink: string;
   hidden: boolean;
 };
+
+
+export type CreateSocialNetworkDto = Omit<
+  SocialNetworkRefType,
+  "id" | "hidden"
+>;

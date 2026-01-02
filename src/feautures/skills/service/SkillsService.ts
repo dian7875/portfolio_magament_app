@@ -4,6 +4,7 @@ import type { SkillsFilters } from "../type/SkillsFilters";
 import type { UpdateType } from "../../../shared/types/UpdateType";
 import type { CreateSkillsDto, SkillsType } from "../type/SkillsType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const SkillsService = {
   async getMySkills(filters: SkillsFilters) {
@@ -27,15 +28,21 @@ export const SkillsService = {
     }
   },
   removeSkill(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/skills/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.delete<ApiMutationResponse>(`/skills/${id}`)
+    );
   },
 
   hideSkill(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/skills/hide/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.patch<ApiMutationResponse>(`/skills/hide/${id}`)
+    );
   },
 
   restoreSkill(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/skills/recover/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.patch<ApiMutationResponse>(`/skills/recover/${id}`)
+    );
   },
 
   getOneSkill(id: number) {
@@ -44,11 +51,13 @@ export const SkillsService = {
 
   patchSkill(data: UpdateType<SkillsType>) {
     return axiosRequest(() =>
-      axiosInstance.patch(`/skills/${data.id}`, data.data)
+      axiosInstance.patch<ApiMutationResponse>(`/skills/${data.id}`, data.data)
     );
   },
 
   postSkill(data: CreateSkillsDto) {
-    return axiosRequest(() => axiosInstance.post(`/skills`, data));
+    return axiosRequest(() =>
+      axiosInstance.post<ApiMutationResponse>(`/skills`, data)
+    );
   },
 };

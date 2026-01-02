@@ -20,11 +20,11 @@ body {
   color: white;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-.custom-text-area span, label{
- color: white !important;
+.custom-text-area span,
+.custom-text-area label {
+  color: white !important;
 }
-

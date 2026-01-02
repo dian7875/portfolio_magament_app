@@ -4,6 +4,7 @@ import type { UpdateType } from "../../../shared/types/UpdateType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
 import type { CreateProjectDto, Project } from "../type/ProjectType";
 import { handleAxiosError } from "../../../shared/utils/handleAxiosError";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const ProjectsService = {
   async getMyProjects(filters: any) {
@@ -55,15 +56,15 @@ export const ProjectsService = {
   },
 
   removeProject(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/projects/${id}`));
+    return axiosRequest<ApiMutationResponse>(() => axiosInstance.delete(`/projects/${id}`));
   },
 
   hideProject(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/projects/hide/${id}`));
+    return axiosRequest<ApiMutationResponse>(() => axiosInstance.patch(`/projects/hide/${id}`));
   },
 
   restoreProject(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/projects/recover/${id}`));
+    return axiosRequest<ApiMutationResponse>(() => axiosInstance.patch(`/projects/recover/${id}`));
   },
 
   getOneProject(id: number) {

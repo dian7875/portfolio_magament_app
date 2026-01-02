@@ -4,6 +4,7 @@ import type { EducationFilters } from "../type/EducationFilter";
 import type { UpdateType } from "../../../shared/types/UpdateType";
 import type { CreateEducationDto, EducationType } from "../type/EducationType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const EducationService = {
   async getMyEducations(filters: EducationFilters) {
@@ -26,25 +27,33 @@ export const EducationService = {
   },
 
   postEducation(data: CreateEducationDto) {
-    return axiosRequest(() => axiosInstance.post(`/education`, data));
+    return axiosRequest(() =>
+      axiosInstance.post<ApiMutationResponse>(`/education`, data)
+    );
   },
 
   patchEducation(data: UpdateType<EducationType>) {
     return axiosRequest(() =>
-      axiosInstance.patch(`/education/${data.id}`, data.data)
+      axiosInstance.patch<ApiMutationResponse>(`/education/${data.id}`, data.data)
     );
   },
 
   removeEducation(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/education/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.delete<ApiMutationResponse>(`/education/${id}`)
+    );
   },
 
   hideEducation(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/education/hide/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.patch<ApiMutationResponse>(`/education/hide/${id}`)
+    );
   },
 
   restoreEducation(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/education/restore/${id}`));
+    return axiosRequest(() =>
+      axiosInstance.patch<ApiMutationResponse>(`/education/restore/${id}`)
+    );
   },
   getOneEducation(id: number) {
     return axiosRequest<EducationType>(() =>

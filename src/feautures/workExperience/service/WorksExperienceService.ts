@@ -2,7 +2,11 @@ import axios from "axios";
 import axiosInstance from "../../../shared/services/AxiosIstance";
 import type { PaginationDto } from "../../../shared/types/PaginationType";
 import type { UpdateType } from "../../../shared/types/UpdateType";
-import type { ExperiencesType } from "../type/ExperiencesType";
+import type {
+  CreateExperienceDto,
+  ExperiencesType,
+} from "../type/ExperiencesType";
+import { axiosRequest } from "../../../shared/utils/axiosRequest";
 
 export const WorkExperiencesService = {
   async getMyWorkExperiencesRef(filters: PaginationDto) {
@@ -24,81 +28,33 @@ export const WorkExperiencesService = {
     }
   },
 
-  async removeExperience(id: number) {
-    try {
-      const response = await axiosInstance.delete(`/experiences/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  createExperience(data: CreateExperienceDto) {
+    return axiosRequest(() => axiosInstance.post(`/experiences`, data));
   },
 
-  async hideExperience(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/experiences/hide/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  removeExperience(id: number) {
+    return axiosRequest(() => axiosInstance.delete(`/experiences/${id}`));
   },
 
-  async restoreExperience(id: number) {
-    try {
-      const response = await axiosInstance.patch(`/experiences/recover/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  hideExperience(id: number) {
+    return axiosRequest(() => axiosInstance.patch(`/experiences/hide/${id}`));
   },
 
-  async getOneExperience(id: number) {
-    try {
-      const response = await axiosInstance.get(`/experiences/${id}`);
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  restoreExperience(id: number) {
+    return axiosRequest(() =>
+      axiosInstance.patch(`/experiences/recover/${id}`)
+    );
   },
 
-  async patchExperience(data: UpdateType<ExperiencesType>) {
-    try {
-      const response = await axiosInstance.patch(
-        `/experiences/${data.id}`,
-        data.data
-      );
-      return response.data;
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        console.error(error.response?.data || error.message);
-        throw new Error(error.response?.data?.message || "Error desconocido");
-      } else {
-        console.error("Error desconocido:", error);
-        throw new Error("Error desconocido");
-      }
-    }
+  getOneExperience(id: number) {
+    return axiosRequest<ExperiencesType>(() =>
+      axiosInstance.get(`/experiences/${id}`)
+    );
+  },
+
+  patchExperience(data: UpdateType<ExperiencesType>) {
+    return axiosRequest(() =>
+      axiosInstance.patch(`/experiences/${data.id}`, data.data)
+    );
   },
 };
