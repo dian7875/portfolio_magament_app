@@ -7,12 +7,18 @@ import SocialNetRefsManagment from "./feautures/socialNetworks/page/SocialNetRef
 import WorkExperienceManagment from "./feautures/workExperience/page/WorkExperienceManagment.vue";
 import SkillsManagment from "./feautures/skills/page/SkillsManagment.vue";
 import ProjectsManagment from './feautures/projects/page/ProjectsManagment.vue';
+import Dashboard from "./feautures/profile/page/Dashboard.vue";
 
 const routes = [
   {
     path: "/",
     name: "start",
     component: Test,
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: Dashboard,
   },
   {
     path: "/usuario",
@@ -46,7 +52,7 @@ const routes = [
   },
   {
     path: "/proyectos",
-    name: "projects",
+    name: "Projects",
     component: ProjectsManagment,
   },
 ];

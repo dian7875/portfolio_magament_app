@@ -13,3 +13,12 @@ export type UserType = {
   cvUrl: string | null;
   cvPath: string | null;
 };
+
+export interface Summary {
+  experiences: number;
+  education: number;
+  skills: number;
+  projects: number;
+  languages: number;
+  socialMedias: number;
+}
