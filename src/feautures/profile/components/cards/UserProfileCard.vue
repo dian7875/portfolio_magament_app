@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   id: string;
   userName: string;
   email: string;

@@ -7,6 +7,7 @@ import type {
   ExperiencesType,
 } from "../type/ExperiencesType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const WorkExperiencesService = {
   async getMyWorkExperiencesRef(filters: PaginationDto) {
@@ -29,20 +30,20 @@ export const WorkExperiencesService = {
   },
 
   createExperience(data: CreateExperienceDto) {
-    return axiosRequest(() => axiosInstance.post(`/experiences`, data));
+    return axiosRequest(() => axiosInstance.post<ApiMutationResponse>(`/experiences`, data));
   },
 
   removeExperience(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/experiences/${id}`));
+    return axiosRequest(() => axiosInstance.delete<ApiMutationResponse>(`/experiences/${id}`));
   },
 
   hideExperience(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/experiences/hide/${id}`));
+    return axiosRequest(() => axiosInstance.patch<ApiMutationResponse>(`/experiences/hide/${id}`));
   },
 
   restoreExperience(id: number) {
     return axiosRequest(() =>
-      axiosInstance.patch(`/experiences/recover/${id}`)
+      axiosInstance.patch<ApiMutationResponse>(`/experiences/recover/${id}`)
     );
   },
 
@@ -54,7 +55,7 @@ export const WorkExperiencesService = {
 
   patchExperience(data: UpdateType<ExperiencesType>) {
     return axiosRequest(() =>
-      axiosInstance.patch(`/experiences/${data.id}`, data.data)
+      axiosInstance.patch<ApiMutationResponse>(`/experiences/${data.id}`, data.data)
     );
   },
 };

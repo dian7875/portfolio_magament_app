@@ -9,5 +9,5 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ title: string; count: number }>();
+defineProps<{ title: string; count: number }>();
 </script>

@@ -7,6 +7,7 @@ import type {
 } from "../type/SocialNetworkRefType";
 import type { UpdateType } from "../../../shared/types/UpdateType";
 import { axiosRequest } from "../../../shared/utils/axiosRequest";
+import type { ApiMutationResponse } from "../../../shared/types/ApiMutationResponse";
 
 export const SocialNetworksService = {
   async getMySocialNetworksRef(filters: PaginationDto) {
@@ -28,34 +29,29 @@ export const SocialNetworksService = {
     }
   },
   patchSN(data: UpdateType<SocialNetworkRefType>) {
-    return axiosRequest(() =>
+    return axiosRequest<ApiMutationResponse>(() =>
       axiosInstance.patch(`/social-medias/${data.id}`, data.data)
     );
   },
 
-  // ✅ DELETE
   removeSN(id: number) {
-    return axiosRequest(() => axiosInstance.delete(`/social-medias/${id}`));
+    return axiosRequest(() => axiosInstance.delete<ApiMutationResponse>(`/social-medias/${id}`));
   },
 
-  // ✅ HIDE
   hideSN(id: number) {
-    return axiosRequest(() => axiosInstance.patch(`/social-medias/hide/${id}`));
+    return axiosRequest(() => axiosInstance.patch<ApiMutationResponse>(`/social-medias/hide/${id}`));
   },
 
-  // ✅ RESTORE
   restoreSN(id: number) {
     return axiosRequest(() =>
-      axiosInstance.patch(`/social-medias/recover/${id}`)
+      axiosInstance.patch<ApiMutationResponse>(`/social-medias/recover/${id}`)
     );
   },
 
-  // ✅ CREATE
   createSN(data: CreateSocialNetworkDto) {
-    return axiosRequest(() => axiosInstance.post(`/social-medias`, data));
+    return axiosRequest(() => axiosInstance.post<ApiMutationResponse>(`/social-medias`, data));
   },
 
-  // ✅ GET ONE
   getOneSN(id: number) {
     return axiosRequest<SocialNetworkRefType>(() =>
       axiosInstance.get(`/social-medias/${id}`)

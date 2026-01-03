@@ -56,7 +56,7 @@ import BasicModal from "../../../../shared/components/BasicModal.vue";
 import EditBasicInfoForm from "../forms/EditBasicInfoForm.vue";
 import { computed, ref } from "vue";
 
-const props = defineProps<{
+defineProps<{
   id: string;
   userName: string;
   phone: string;
