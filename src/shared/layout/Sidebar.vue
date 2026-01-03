@@ -33,7 +33,7 @@
             <span class="font-semibold">{{ userName }}</span>
           </div>
 
-          <FwbButton class="w-full" color="red" pill outline
+          <FwbButton @click="logOut()" class="w-full" color="red" pill outline
             >Cerrar sesión</FwbButton
           >
         </div>
@@ -50,10 +50,17 @@ import { SIDEBAR_ITEMS } from "./sidebarItemsList";
 import { Button, Drawer } from "primevue";
 import { FwbAvatar, FwbButton } from "flowbite-vue";
 import { userStore } from "../store/user";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const photoUrl = computed(
   () => userStore.user?.photoUrl || "/default-avatar.png"
 );
+
+function logOut() {
+  router.replace("/");
+  close()
+  userStore.logout();
+}
 
 const userName = computed(() => userStore.user?.name || "Desconocido");
 
