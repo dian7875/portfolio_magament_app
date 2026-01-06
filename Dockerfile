@@ -6,8 +6,8 @@ FROM node:24-alpine AS build
 WORKDIR /app
 
 # Build-time args para Vite
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
 # Copiar archivos de dependencias
 COPY package*.json ./
