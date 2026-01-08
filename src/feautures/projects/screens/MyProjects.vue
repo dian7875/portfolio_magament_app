@@ -13,7 +13,10 @@
         :key="item.id"
         :data="{
           id: String(item.id),
-          title: `Nombre: ${item.title}  (${formatYear(item.finishDate)})`,
+          title: `Nombre: ${item.title} (${formatYear(item.finishDate)})${
+            item.highlight ? ' ⭐' : ''
+          }`,
+
           resumen: [
             `Demo: ${item.demoUrl}`,
             `Repositorio: ${item.repoUrl}`,

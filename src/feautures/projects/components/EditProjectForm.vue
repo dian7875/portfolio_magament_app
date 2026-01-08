@@ -15,6 +15,13 @@
         placeholder="Ej: Mi proyecto"
         v-bind="bind('title')"
       />
+      <FwbCheckbox
+        id="highlight"
+        name="highlight"
+        label="Destacado"
+        :model-value="values.highlight ?? false"
+        @update:model-value="(val) => setFieldValue('highlight', val as boolean)"
+      />
       <FwbInput
         id="subtitle"
         name="subtitle"
@@ -162,7 +169,7 @@
 import { ref, computed, watch } from "vue";
 import { useForm } from "vee-validate";
 import { useQuery, useQueryClient } from "@tanstack/vue-query";
-import { FwbInput, FwbTextarea } from "flowbite-vue";
+import { FwbCheckbox, FwbInput, FwbTextarea } from "flowbite-vue";
 import toast from "vue3-hot-toast";
 import type { Project } from "../type/ProjectType";
 import { ProjectsService } from "../service/ProjectsService";
@@ -188,6 +195,7 @@ const { handleSubmit, values, setValues, setFieldValue } = useForm<
     demoUrl: "",
     techStack: [],
     finishDate: "",
+    highlight: false,
   },
 });
 

@@ -11,6 +11,7 @@ export type Project = {
   techStack: string[];
   hidden: boolean;
   finishDate: string;
+  highlight?: boolean;
 };
 
 export type CreateProjectDto = {
@@ -19,6 +20,7 @@ export type CreateProjectDto = {
   description?: string | null;
   repoUrl?: string | null;
   demoUrl?: string | null;
+  highlight?: boolean;
   techStack: string[];
   finishDate?: string;
   files?: File[];

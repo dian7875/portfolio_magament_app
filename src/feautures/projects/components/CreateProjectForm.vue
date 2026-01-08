@@ -16,6 +16,14 @@
       </template>
     </FwbInput>
 
+    <FwbCheckbox
+      id="highlight"
+      name="highlight"
+      label="Destacado"
+      :model-value="highlight"
+      @update:model-value="(val) => setFieldValue('highlight', val as boolean)"
+    />
+
     <FwbInput
       label="Subtítulo"
       placeholder="Ej: Proyecto de demostración"
@@ -167,7 +175,7 @@ import { ref, computed } from "vue";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
 import { useQueryClient } from "@tanstack/vue-query";
-import { FwbInput, FwbTextarea } from "flowbite-vue";
+import { FwbCheckbox, FwbInput, FwbTextarea } from "flowbite-vue";
 import FwbStyleDatePicker from "../../../shared/components/FwbStyleDatePicker.vue";
 import { UseCreateProject } from "../composables/useCreateProject";
 import type { CreateProjectDto } from "../type/ProjectType";
@@ -232,6 +240,8 @@ const { value: repoUrl, errorMessage: repoUrlError } =
 const { value: demoUrl, errorMessage: demoUrlError } =
   useField<string>("demoUrl");
 
+const { value: highlight } = useField<boolean>("highlight");
+
 const finishDate = ref<string | null>(null);
 const description = ref<string | null>(null);
 
@@ -245,6 +255,8 @@ const submitForm = handleSubmit(() => {
   if (description.value) formData.append("description", description.value);
   if (repoUrl.value) formData.append("repoUrl", repoUrl.value);
   if (demoUrl.value) formData.append("demoUrl", demoUrl.value);
+  if (highlight.value == true)
+    formData.append("highlight", String(highlight.value));
   if (finishDate.value) formData.append("finishDate", finishDate.value);
   techStack.value.forEach((tech) => formData.append("techStack", tech));
   newFiles.value.forEach((file) => formData.append("images", file));
