@@ -17,6 +17,10 @@
       <FwbButton color="yellow" @click="isEditCvOpen = true">
         {{ cvUrl ? "Cambiar CV" : "Subir CV" }}
       </FwbButton>
+
+      <FwbButton color="blue" outline @click="isGenerateCv = true">
+        Generar Cv
+      </FwbButton>
     </div>
   </div>
   <BasicModal
@@ -31,6 +35,10 @@
       ref="formRef"
     />
   </BasicModal>
+
+  <GenerateCv
+  v-model:visible="isGenerateCv"
+  />
 </template>
 
 <script setup lang="ts">
@@ -38,6 +46,7 @@ import { FwbButton } from "flowbite-vue";
 import ChangeCV from "../forms/ChangeCV.vue";
 import { computed, ref } from "vue";
 import BasicModal from "../../../../shared/components/BasicModal.vue";
+import GenerateCv from "../forms/GenerateCv.vue";
 
 defineProps<{
   cvUrl?: string | null;
@@ -45,6 +54,7 @@ defineProps<{
 }>();
 
 const isEditCvOpen = ref(false);
+const isGenerateCv = ref(false);
 const formRef = ref<InstanceType<typeof ChangeCV>>();
 
 const loading = computed(() => formRef.value?.isPending ?? false);
