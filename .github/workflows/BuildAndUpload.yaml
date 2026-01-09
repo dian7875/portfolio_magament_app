@@ -2,7 +2,7 @@ name: Build and Push Vue App
 
 on:
   push:
-    branches: [main]
+    branches: [Produccion]
   workflow_dispatch:
 
 jobs:

@@ -137,7 +137,7 @@ const submitForm = handleSubmit(async (values) => {
     return;
   }
 
-  if (!data.finished) {
+  if (!data.finished && data.finished != undefined) {
     data.endDate = null;
   }
 
